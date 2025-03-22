@@ -99,3 +99,52 @@ $x[:, j]_{normalization} = \frac{x[:, j] - min(x[:, j])}{max(x[:, j]) - min([:, 
 
 # Model evaluation (week: 02/27)
 
+## Assumption in Machine Learning
+- How you determine your training dataset so that your model works
+on the unseen (test) dataset?  
+    1. Training dataset must be ``representative enough``
+    2. In other words, training and testing datasets are  `on the same distribution`  
+
+    <img src="images/img7.jpg" width="250"/>
+
+## Robustness Evaluation
+**Goal:** check how bad your model could be when you change your selection of training and testing data set.  
+1.  Do **repeated trials**! (Change the selected training and testing)
+2.  show **statistics** of the performance of your model on
+the **testing dataset**  ex: boxplot, normal distribution of multiple trials.
+
+## Overvitting 
+ **Overfitting:** model works well on training dataset, but performs poor on testing dataset.  
+ - Blue dots: 2D feature vectors of men images  
+ - Red dots: 2D feature vectors of women images  
+ - Green curve: an overfitted model
+ - Black curve: a more general model
+
+ <img src="images/img8.jpg" width="150"/>  
+
+ > *Detect Outliers: Suppose small portion of outliers => How to detect outliers?  
+Once the model is trained appropriately it should be a general model. Feed the training samples into the model to make predictions. the samples with relatively larger
+**"prediction error"** could be potential outliers.
+
+### Reasons and solutions to Overfitting
+1. Training dataset is not representative 
+
+    ➔ re-select the training samples  
+
+2.  Model complexity is high  
+
+    ➔ reduce the model complexity  
+
+3.  Train too much   
+
+    ➔ reduce the number of training epochs
+
+### When to stop Training
+<img src="images/img9.jpg" width=""/> 
+
+1. keep testing dataset for final evaluation
+2. Stop when error(loss) on **validation dataset start to increase**   
+
+(Overfit: accuracy of training dataset high validation low. Underfit:accuracy of training dataset low validation low )
+
+## Confusion matrix and Accurracy
