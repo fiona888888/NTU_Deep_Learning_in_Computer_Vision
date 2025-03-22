@@ -233,3 +233,55 @@ The **confusion matrix** helps analyze classification errors at a chosen thresho
 ✔ **Confusion Matrix** shows actual vs. predicted classifications.  
 ✔ **Threshold tuning is necessary** to balance precision and recall.
 
+## Support Machine Vectors
+**Support vector machine (SVM)** is a very popular algorithm in
+machine learning (ML) community.
+- Can do classification problems.  
+- Can do regression problems.  
+- Find the hyperplane that separates different classes.  
+- May require a kernel function to project the data into higher
+dimension spaces.  
+
+    <img src="images/img10.jpeg" width="250"/>
+
+### Hard SVM (Linearly-Separable Case)
+Recall on a 2D plane, we define a line with the equation:  
+- $𝑙: 𝐴𝑥 + 𝐵𝑦 + 𝑏 = 0$  
+- In SVM, we usually denote the inputs as $𝒙_{i} = [x_{1}, x_{2},...,x_{p}]^{T}$,, and the
+corresponding label as $y_{i} = [1 or -1]$  for binary classification.
+- Assume the input space is 2D (i.e., 𝑝 = 2), the same line $l$ can be
+represented as: 
+$$
+w = 
+\begin{bmatrix} 
+  A \\
+  B \\ 
+\end{bmatrix}, 
+
+x = 
+\begin{bmatrix} 
+  x_{1} \\
+  x_{2} \\ 
+\end{bmatrix},
+𝑙: w^{T}𝑥 + 𝑏 = 0
+$$
+<img src="images/img11.jpg" width="250" style="margin-left: 50px;">
+
+- Define the hyperplane: $H_{0}:  w^{T}_{0}x + b_{0} = 0$, we want to find the optimal 𝒘 so that the margin is the largest.  
+Why largest margin? Ans: Avoid Overfitting
+<img src="images/img12.jpg" width="250" style="margin-left: px;">
+
+- How to compute the margin?
+
+<img src="images/img13.jpg" width="" style="margin-left: px;">  
+  
+  -  Support vectors: points on 𝐻1 and 𝐻2: $x_{+}$ & $x_{-}$
+   - To maximize the margin 2d, we need to minimize $\left \| w \right \| \ $
+   - to minimize $\left \| w \right \| \ $, we should minimize 
+
+       $min(\frac{1}{2}w^{T}w) = \frac{1}{2}\left \| w \right \|^{2}$    
+       subject to $y_{i}(w^{T}x_{i}+b)\geq 1, i = 1,...,n$
+
+<img src="images/img14.jpg" width="" style="margin-left: px;"> 
+    
+### Soft SVM (Non-Separable Case)
