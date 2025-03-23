@@ -285,3 +285,83 @@ Why largest margin? Ans: Avoid Overfitting
 <img src="images/img14.jpg" width="" style="margin-left: px;"> 
     
 ### Soft SVM (Non-Separable Case)
+#### What if there are Noise/Outliers:
+<img src="images/img15.jpg" width="" style="margin-left: px;"> 
+
+- we can relax the constraint by    
+➜ decreasing penalty C (to increase $\zeta_{i}$ allowing more misclassified examples)
+
+#### What if the data cannot be separable in the original space?
+<img src="images/img16.jpg" width="" style="margin-left: px;">
+
+- Use a kernel function 𝜙(∙) to map the inputs into a higher dimensional space to be separated with a hyperplane.  
+- Once you map the inputs, following the same formulation in soft SVM.
+
+### Remarks
+- These SVM is a **constrained optimization**(vs.unconstrained) problem
+- The equations mentioned above are **primary form** of SVM
+-  However, in practice the above optimization problem is solved by its **dual form**.  
+>#### **Dual form :**
+>- leverages the **kernel trick**, making the
+optimization process **more efficient**  
+>- can be implemented using gradient descent
+>- Instead of optimizing 𝒘 explicitly, the dual form only
+depends on the on the samples $x_{i}$ through kernel products.   
+ $\sum \alpha \cdot \phi ( x _ { i } ) \cdot \phi ( x _ { j } )$  
+>- There are other variants of SVM algorithms. SVM can also be used in
+**regression problems**.
+>- Further reading:  
+Ch. 11.5 in: http://ciml.info/dl/v0_99/ciml-v0_99-ch11.pdf  
+scikit-learn: https://scikit-learn.org/stable/modules/svm.html#mathematical-formulation
+
+### Hyperparameters
+- any parameter in the algorithm that may affect the
+performance.
+- Usually you need to do **hyperparameter tuning** to find the best parameter set for your model.
+any parameter in the algorithm that may affect the
+performance.
+- some important hyperparameter:
+
+  - penalty 𝐶  
+  - kernel function. E.g.: linear, polynomial, Radial Basis Function (RBF)  
+  - Parameters in the kernel function
+
+## K-nearest Neighbor
+#### Steps:
+1. Prepare a training dataset.
+2. Apply appropriate **feature transformation**.  
+3. Given a testing sample, compute the **distance** between the **testing sample** and **each training sample**.  
+4. **Sort** the distances, and **choose the K value**.
+5. Assign labels based on the **majority vote** of the K-nearest neighbors.
+<img src="images/img17.jpg" width="90" style="margin-left: 200px;">
+
+#### Hyperparameters:
+- The K value.  
+- The feature transformation you use.  
+- The distance metric you use. eg:  
+  
+  $L2 norm:$ 
+     $$
+    w = 
+    \begin{bmatrix} 
+    A \\
+    B \\ 
+    \end{bmatrix}, 
+     \left \| w \right \| \ ^2 = \sqrt { A ^ { 2 } + B ^ { 2 } }
+    $$  
+
+    $L1 norm:  | | \overrightarrow { w } | | = | A + B | = | A | + | B |$
+
+#### Brainstorming:
+- How does the **K value relate to overfitting**?  
+    ➜  smaller 17 has the tendency to overfit eg. K = 1, affected by outliers.
+
+- Is there any **“training”** involved in the solution process?  
+    ➜ since you are just computing the distance between the testing samples and the training samples.
+
+- Can K-nearest neighbor do **regression problems**?  
+    ➜ yes, use **weighted average** $ \propto\frac { 1 } { distance} $ of the training samples.
+    
+    - prediction:   
+      $v _ { 1 } \cdot \frac {\frac { 1 } { d _ { 1 } } } { \frac { 1 } { d _ { 1 } } + \frac { 1 } { d _ { 2 } } + \frac { 1 } { d _ { 3 } } } + v _ { 2 } \cdot \frac {\frac { 1 } { d _ { 2 } } } { \frac { 1 } { d _ { 1 } } + \frac { 1 } { d _ { 2 } } + \frac { 1 } { d _ { 3 } } } + v _ { 3 } \cdot \frac {\frac { 1 } { d _ { 3 } } } { \frac { 1 } { d _ { 1 } } + \frac { 1 } { d _ { 2 } } + \frac { 1 } { d _ { 3 } } } $
+      <img src="images/img18.jpg" width="150" style="margin-left: 100px;">
