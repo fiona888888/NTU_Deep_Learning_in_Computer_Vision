@@ -365,3 +365,41 @@ performance.
     - prediction:   
       $v _ { 1 } \cdot \frac {\frac { 1 } { d _ { 1 } } } { \frac { 1 } { d _ { 1 } } + \frac { 1 } { d _ { 2 } } + \frac { 1 } { d _ { 3 } } } + v _ { 2 } \cdot \frac {\frac { 1 } { d _ { 2 } } } { \frac { 1 } { d _ { 1 } } + \frac { 1 } { d _ { 2 } } + \frac { 1 } { d _ { 3 } } } + v _ { 3 } \cdot \frac {\frac { 1 } { d _ { 3 } } } { \frac { 1 } { d _ { 1 } } + \frac { 1 } { d _ { 2 } } + \frac { 1 } { d _ { 3 } } } $
       <img src="images/img18.jpg" width="150" style="margin-left: 100px;">
+
+## Decision Tree (03/13)  
+ Decision tree (DT) is a straightforward algorithm in machine learning (ML).
+
+- Usually used in classification problems.  
+- Make prediction based on attributes, i.e., features.  
+- Rule-based ML.  
+- Core concept: determine the optimal order of features to be used in the tree. 
+
+### Entropy
+a measure of **disorder**.
+>$$
+\text{$H(p_1, p_2, ..., p_K) = - \sum_{i=1}^K p_i \log_2(p_i)$}
+$$
+- The higher the entropy, the higher the disorder.
+- $𝑝𝑖$ : the probability of a sample being Class $𝑖$. $𝐾$: number of classes.  
+Example:  
+<img src="images/img19.jpg" width="400" style="margin-left: px;">
+- Intuition: At each **parent node**, pick the **feature** such that, the resulting **entropy** at the **children nodes** are **minimized**.  
+<img src="images/img20.jpg" width="300" style="margin-right: px;">  
+
+### Information Gain
+How much you reduce the entropy.
+<div style="text-align: center;">
+    <img src="images/img21.jpg" width="300">
+</div>
+
+$𝑆$ : samples at parent node; $𝐴$: the selected feature; $𝑣$: values in feature $𝐴$; $|𝑆|$ number of samples at parent node; $|𝑠_{𝑣}|$ number of samples at child node when $𝐴 = 𝑣$.   
+> ➜ Objective : At each **parent node**, find the feature $𝐴$ so that the **information gain** is the **largest**.
+
+- DT Example:   
+Will I play badminton today?  
+<img src="images/img22.jpg" width="300" style="margin-left: px;">
+
+
+
+
+
