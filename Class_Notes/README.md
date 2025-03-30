@@ -395,11 +395,76 @@ How much you reduce the entropy.
 $𝑆$ : samples at parent node; $𝐴$: the selected feature; $𝑣$: values in feature $𝐴$; $|𝑆|$ number of samples at parent node; $|𝑠_{𝑣}|$ number of samples at child node when $𝐴 = 𝑣$.   
 > ➜ Objective : At each **parent node**, find the feature $𝐴$ so that the **information gain** is the **largest**.
 
+### Calculation
+
 - DT Example:   
 Will I play badminton today?  
 <img src="images/img22.jpg" width="300" style="margin-left: px;">
 
+1. Current Entropy (Parent node $H(s)$)  
+   $p = \frac{9}{14}$
 
+    $n = \frac{5}{14}$
 
+    $H(s, label)=-\frac{9}{14} log_{2} (\frac{9}{14}) -\frac{5}{14} log_{2} (\frac{5}{14})\approx 0.94$
+2. Determine children node  
+- calculate each features information gain, select the highest.  
+    > **Outlook :**  
+<img src="images/img23.jpg" width="300" style="margin-left: px;">   
+**Humidity :**  
+<img src="images/img24.jpg" width="300" style="margin-left: px;">  
+Temperature, Wind same calculation  
 
+    >Information Gain:   
+    >- Outlook: 0.246 (max)  
+    >- Humidity: 0.151
+    >- Wind: 0.048 
+    >- Outlook: 0.029   
 
+3. **Select & Split** on Outlook:  
+Do the same thing at the next layer child node    
+<img src="images/img25.jpg" width="300" style="margin-left: px;"> 
+4. Final Results :  
+<img src="images/img26.jpg" width="180" style="margin-left: px;">
+      
+- Note: If the **final entropy** at the children nodes are **not zeros**, do **major voting**.
+
+### Avoid Overfitting and Other Variants of DT
+- Strategies to avoid overfitting
+    - Fix the **depth** of the tree.  
+    - Check the performance of the **validation** dataset **while growing** the tree. Stop growing the tree if overfitting is observed.  
+    - **Post pruning**: replace the sub-tree with majority vote.  
+- Other variants of DT:
+    - Random forest (RF).  
+    - RF is an **ensemble learning** based approach. RF aggregates the
+prediction of multiple decision trees.  <br><br>
+    
+# Neural Networks
+- The idea of a neural networks (NNs):   
+NNs learn relationship between cause(input) and effect(output) or organize large volumes of data into orderly and informative patterns.  
+- Inspiration from Neurobiology:  
+    - A biological neuron has three types of main components: dendrites, soma (or cell body) and axon.  
+    - Dendrites receives signals from other neurons.  
+    - The soma, sums the incoming signals. When sufficient input is received, the cell fires, that is, it transmit a signal over its axon to other cells.
+
+- Artificial neurons:  
+<img src="images/img27.jpg" width="300" style="margin-left: px;">  
+    - From experience: examples / training data  
+    - Strength of connection between the neurons is stored as a weight-value
+    for the specific connection  
+    - Learning the solution to a problem = changing the connecting weights
+
+## Network Architecture  
+- A typical neural network (NN):  
+<img src="images/img28.jpg" width="300" style="margin-left: px;">  
+    - A neural net consists of a large number of simple processing elements
+    called **neurons**, units, cells or nodes.  
+    - Each **neuron** is **connected** to other neurons by means of directed
+    communication links, each **with associated weight**.
+- Consider a single neuron:  
+<img src="images/img29.jpg" width="250" style="margin-left: px;">  <img src="images/img30.jpg" width="300" style="margin-left: px;">   
+    >- Why do we need an activation function?  
+    >learn Non-linear relationship between input and output.  
+
+## Activation functions:
+<img src="images/img31.jpg" width="350" style="margin-left: px;"> 
