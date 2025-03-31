@@ -468,3 +468,19 @@ NNs learn relationship between cause(input) and effect(output) or organize large
 
 ## Activation functions:
 <img src="images/img31.jpg" width="350" style="margin-left: px;"> 
+
+## Training a Neural Network
+- A **forward pass** during training:  
+    - Start with **randomly initialized weights**.  
+    - Given a training sample, compute the prediction of the network  
+    - Compute the **discrepancy** (i.e., the **loss**) between the prediction and the
+    target. The function used to compute the loss is called the **objective function**.  
+    - Update the **weights** of the network using the loss. (ex. gradient descent)  
+
+### Objective (Loss) Functions
+- Objective Functions for NNs:  
+    - **Regression**    
+        - Quadratic loss (i.e. mean squared error)  
+    - **Classification**  
+        - Cross-entropy (i.e. negative log likelihood)
+
