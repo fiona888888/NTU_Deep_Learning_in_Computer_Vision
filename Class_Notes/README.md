@@ -522,4 +522,40 @@ Reason	Explanation
         - Cross-entropy (i.e. negative log likelihood)  
         <img src="images/img34.jpg" width="350" style="margin-left: px;">  
 
-##
+### 3. Backpropagation  
+1. Takes the loss from the forward pass 
+2. Efficiently calculating all the **partial derivatives** using the **chain rule** layer by layer, backward through the network.
+3. Get gradients:  compute
+    - $\frac{\partial L}{\partial W_i}$ — how the loss changes w.r.t. each weight
+    - $\frac{\partial L}{\partial b_i}$ — how the loss changes w.r.t. each bias 
+
+> - Backpropagation = Gradient Calculator  
+> - Optimizer = Gradient User
+
+No matter how smart or fancy the optimizer is (e.g., Adam, RMSprop, Adagrad...), it still needs gradients — and backprop gives them.    
+Example:  
+  <img src="images/img36.jpg" width="400" style="margin-left: px;">  
+  <img src="images/img37.jpg" width="400" style="margin-left: px;">    
+
+### 4. Gradient Descent  
+  <img src="images/img38.jpg" width="400" style="margin-left: px;">  
+  
+  >- the gradient points toward the direction of the steepest increasing of the function, since we want minimize the error, we update the parameters using the opposite direction of the gradient.  
+#### learning rate: $\quad$ $\theta \leftarrow \theta - \eta \cdot \frac{\partial L}{\partial \theta} $  
+1. start with commom default:  
+
+    Most libraries and optimizers come with **well-tested defaults**   
+    | Optimizer | Common Default Learning Rate |
+    |----------|-------------------------------|
+    | SGD (no momentum) | `0.01` |
+    | SGD + Momentum     | `0.1` |
+    | Adam               | `0.001` |
+    | RMSprop            | `0.001` |  
+2.  Watch for Signs in the Loss Curve: 
+
+
+
+
+  
+
+
