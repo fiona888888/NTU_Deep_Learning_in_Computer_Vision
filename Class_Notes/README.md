@@ -537,7 +537,7 @@ Example:
   <img src="images/img36.jpg" width="400" style="margin-left: px;">  
   <img src="images/img37.jpg" width="400" style="margin-left: px;">    
 
-### 4. Gradient Descent  
+### 4. Optimizer : Gradient Descent  
   <img src="images/img38.jpg" width="400" style="margin-left: px;">  
   
   >- the gradient points toward the direction of the steepest increasing of the function, since we want minimize the error, we update the parameters using the opposite direction of the gradient.  
@@ -551,11 +551,99 @@ Example:
     | SGD + Momentum     | `0.1` |
     | Adam               | `0.001` |
     | RMSprop            | `0.001` |  
-2.  Watch for Signs in the Loss Curve: 
+2.  Watch for Signs in the Loss Curve:   
 
+    | Behavior | Likely Issue | Action |
+    |----------|--------------|--------|
+    | 📉 Loss decreases smoothly | ✅ All good! | Continue |
+    | 🔁 Loss plateaus | LR too low | Increase slowly |
+    | 🚀 Loss spikes or oscillates wildly | LR too high | Decrease 10x |
 
+    > 💡 Rule of thumb: Try changing it by a factor of **2 or 10** at a time.
+3. Tips  
 
+    | Tip | What to Do |
+    |-----|------------|
+    | 🚀 LR too high? | Decrease by 10x |
+    | 🐌 LR too low? | Increase by 2x or 10x |
+    | 🧪 Not sure? | Try LR Finder |
+    | 📉 Stuck loss? | Try a scheduler or reduce LR |
+    | 🧠 Fine-tuning? | Use smaller LR |
+    | 📊 Validation loss unstable? | Use `ReduceLROnPlateau` |
+4. Other commom optimizers:  
+- Stochastic gradient descent (SGD)
+- Adam  
+SGD sudo code:  
+<img src="images/img39.jpg" width="400" style="margin-left: px;">
 
+### 5. Avoid overfitting:      
+Strategies to avoid overfitting:  
+ - Check the performance of the validation dataset while training. Stop
+    training if overfitting is observed.  
+- Use dropout layers. (May not be useful.)  
+- Use less number of training epochs.  
+- Reduce the number of trainable parameters.
+
+## Neural network application  
+- Voice recognition:  
+<img src="images/img40.jpg" width="400" style="margin-left: px;">
+- require transformation of input signals into feature vectors.  
+- Q: What if our input data is an image? $\quad$ loose spacial correlation
   
 
+# Image Basis and Image Filtering  
+## Image units  
+### Pixel  
+- The word pixel is based on a contraction of pix ("pictures") and el (for
+"element").  
+- In digital imaging, a pixel, is a physical point in a raster image, or the
+smallest addressable element in a display device.  
+### Pixel Indices  
+- Often, the most convenient method for expressing locations in an image
+is to use pixel indices. The image is treated as a grid of discrete elements,
+ordered from top to bottom and left to right.  
+## Image Types  
+### Binary image  
+In a binary image, each pixel assumes one of only two discrete values: 1 or 0.  
 
+<img src="images/img41.jpg" width="350" style="margin-left: px;">  
+
+### Grayscale image  
+A grayscale image (also called gray-scale, gray scale, or gray-level) is a
+data matrix whose values represent intensities (pixel values) within some range, (0 black – 255 white(unsigned integer) or 0 – 1(double)).   
+
+<img src="images/img42.jpg" width="350" style="margin-left: px;">   
+
+### Visual Perception in Grayscale Images  
+<img src="images/img43.jpg" width="200" style="margin-left: px;">     
+
+- How much to sample (quantize) the grayscale?
+    - Humans can distinguish in the order of 100 levels of gray (about 40 to
+    100).  
+
+### Color image  
+A true color image is an image in which each pixel is specified by three
+values — one each for the red, blue, and green components of the
+pixel's color. The color of each pixel is determined by the combination of
+the red, green, and blue intensities stored in each color plane at the
+pixel's location.  
+<img src="images/img44.jpg" width="400" style="margin-left: px;">   
+### Data Types in Computer  
+<img src="images/img45.jpg" width="400" style="margin-left: px;">   
+
+### Histogram in Grayscale Images  
+Given a grayscale image, its histogram consists of the histogram of its
+gray levels; that is, a graph indicating the number of times each gray
+level occurs in the image.
+<img src="images/img46.jpg" width="400" style="margin-left: px;">   
+We can infer a great deal about the appearance of an image from its
+histogram.  
+1. In a **dark image**, the gray levels would be clustered at the lower end  
+2. In a **uniformly bright image**, the gray levels would be clustered at the
+upper end.  
+3. In a **well-contrasted image**, the gray levels would be well spread out
+over much of the range.  
+<img src="images/img47.jpg" width="400" style="margin-left: px;">  
+>   Enhance contrast ➜ image histogram equalization  
+
+## Image filtering  
