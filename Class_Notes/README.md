@@ -647,3 +647,17 @@ over much of the range.
 >   Enhance contrast ➜ image histogram equalization  
 
 ## Image filtering  
+### Representation in math  
+Think of a (grayscale) image as a function, f, from $R^2$
+ to $R$(or a 2D signal):  
+- f(x,y) gives the intensity at position (x,y)
+- A digital image is a discrete (sampled, quantized) version of this function.  
+<img src="images/img48.jpg" width="400" style="margin-left: px;">  
+### Image transformation  
+- Brightening:  
+<img src="images/img49.jpg" width="200" style="margin-left: px;">  
+- mirror:  
+<img src="images/img50.jpg" width="200" style="margin-left: px;">  
+- noise reduction:  
+You could try **averaging the pixels** within a user-specified window!  
+<img src="images/img51.jpg" width="100" style="margin-left: px;">  
