@@ -660,4 +660,24 @@ Think of a (grayscale) image as a function, f, from $R^2$
 <img src="images/img50.jpg" width="200" style="margin-left: px;">  
 - noise reduction:  
 You could try **averaging the pixels** within a user-specified window!  
-<img src="images/img51.jpg" width="100" style="margin-left: px;">  
+<img src="images/img51.jpg" width="100" style="margin-left: px;">   
+
+### Image filtering  
+Modify the pixels in an image based on some function of a local
+neighborhood of each pixel.  
+<img src="images/img52.jpg" width="300" style="margin-left: px;">  
+- Linear filtering:  
+    - Replace each pixel by a linear combination of its neighbors.  
+    - The prescription for this linear combination is called the “kernel” (or
+    “mask”, “filter”).  
+    <img src="images/img53.jpg" width="300" style="margin-left: px;">  
+    - ex: Cross-correlation, Convolution  
+    <img src="images/img54.jpg" width="300" style="margin-left: px;">
+- Cross-correlation:  
+Let F be the image, H be the kernel (of size 2k+1 x 2k+1), and G be the
+resulting image after doing cross-correlation:  
+
+    $G[i,j]=\sum_{u=-k}^{k}\sum_{v=-k}^{k}H[u,v]F[i+u, j+v]$  
+
+    Notation: $G=H\otimes F$  
+    
