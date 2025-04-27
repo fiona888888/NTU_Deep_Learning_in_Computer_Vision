@@ -666,18 +666,55 @@ You could try **averaging the pixels** within a user-specified window!
 Modify the pixels in an image based on some function of a local
 neighborhood of each pixel.  
 <img src="images/img52.jpg" width="300" style="margin-left: px;">  
-- Linear filtering:  
-    - Replace each pixel by a linear combination of its neighbors.  
-    - The prescription for this linear combination is called the “kernel” (or
+#### Linear filtering:  
+
+ - ex: **cross-correlation**(not flip kernal),   **convolution**(flip)
+- Replace each pixel by a linear combination of its neighbors.  
+- The prescription for this linear combination is called the “kernel” (or
     “mask”, “filter”).  
     <img src="images/img53.jpg" width="300" style="margin-left: px;">  
     - ex: Cross-correlation, Convolution  
     <img src="images/img54.jpg" width="300" style="margin-left: px;">
-- Cross-correlation:  
+- **Cross-correlation**:  
 Let F be the image, H be the kernel (of size 2k+1 x 2k+1), and G be the
 resulting image after doing cross-correlation:  
 
     $G[i,j]=\sum_{u=-k}^{k}\sum_{v=-k}^{k}H[u,v]F[i+u, j+v]$  
 
     Notation: $G=H\otimes F$  
-    
+- **Convolution**:  
+same as the cross-correlation operation, except that the
+kernel is “flipped” horizontally and vertically:  
+
+    $G[i,j]=\sum_{u=-k}^{k}\sum_{v=-k}^{k}H[u,v]F[i-u, j-v]$  
+
+    Notation: $G=H*F$  
+    Convolution is  
+    commutative $F*H=H*F$ ,   
+    associative $(G*H)*F=G*(H*F)$    
+    <img src="images/img55.jpg" width="300" style="margin-left: px;">  
+- **zero padding**:  
+convolution often causes size reduction, use zero padding to avoid.  
+<img src="images/img56.jpg" width="300" style="margin-left: px;">    
+>- **filters**(kernal):  
+>     1. size reduction  
+<img src="images/img57.jpg" width="300" style="margin-left: px;">  
+>    2. shift left:   
+<img src="images/img58.jpg" width="300" style="margin-left: px;"> 
+>   3. Blur  
+<img src="images/img59.jpg" width="300" style="margin-left: px;">
+>   4. sharpening filter:  
+<img src="images/img60.jpg" width="300" style="margin-left: px;">  
+<img src="images/img61.jpg" width="200" style="margin-left: px;">  
+>   5. Gaussian kernel:  
+<img src="images/img62.jpg" width="200" style="margin-left: px;">  
+<img src="images/img63.jpg" width="200" style="margin-left: px;">  
+    - x, y: distance from the pixel in the window to the center of the window, give weights to neighboring pixels based on distance.  
+    - σ standard deviation: Controls how much smoothing happens (small σ = less blur, large σ = more blur). Controls the size of the window.  
+    - Removes “high-frequency” components from the image (low-pass filter)  
+
+## Edge Detection  
+- Convert a 2D image into a set of curves:  
+<img src="images/img64.jpg" width="200" style="margin-left: px;">  
+- Causes of Edges(factors):  
+<img src="images/img65.jpg" width="200" style="margin-left: px;"> 
