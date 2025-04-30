@@ -717,4 +717,45 @@ convolution often causes size reduction, use zero padding to avoid.
 - Convert a 2D image into a set of curves:  
 <img src="images/img64.jpg" width="200" style="margin-left: px;">  
 - Causes of Edges(factors):  
-<img src="images/img65.jpg" width="200" style="margin-left: px;"> 
+<img src="images/img65.jpg" width="200" style="margin-left: px;">   
+- An edge is a place of rapid change in the image intensity function  
+<img src="images/img66.jpg" width="200" style="margin-left: px;">   
+
+## Image Derivatives  
+How to differentiate a digital image F(x,y)  
+- Option 1: reconstruct a continuous image, F(x,y), then compute the
+derivative.
+- Option 2: take **discrete derivative** (finite difference).Much more commom.  
+<img src="images/img67.jpg" width="300" style="margin-left: px;">  
+
+## Image Gradient  
+### Gradient of an image:  
+$$
+\nabla f = \left[ \frac{\partial f}{\partial x}, \frac{\partial f}{\partial y} \right]
+$$  
+The gradient points towards the direction of most rapid increase in intensity.  
+<img src="images/img68.jpg" width="300" style="margin-left: px;">  
+### edge strength  
+$$||\nabla f|| = \sqrt{\left( \frac{\partial f}{\partial x} \right)^2 + \left( \frac{\partial f}{\partial y} \right)^2}$$  
+### gradient direction  
+$$\theta = \tan^{-1}\left(\frac{\frac{\partial f}{\partial y}}{\frac{\partial f}{\partial x}}\right)$$  
+> How does this relate to the direction of the edge?  
+>Ans: Edge is "perpendicular" to gradient.  
+<img src="images/img69.jpg" width="300" style="margin-left: px;">  
+Note:  
+$\frac{\partial f}{\partial x}$: make vertical image more visible.  
+$\frac{\partial f}{\partial y}$: make horizontal image more visible.  
+## Noise  
+### Effects  
+<img src="images/img70.jpg" width="300" style="margin-left: px;">  
+
+### Solution: Smoothing  
+<img src="images/img71.jpg" width="300" style="margin-left: px;">  
+
+### Smoothing the Image VS Smoothing the Kernel  
+- Recall: convolution operation is commutative and associative.  
+- **Differentiation** is one type of **convolution operation**.  
+<img src="images/img72.jpg" width="300" style="margin-left: px;">  
+In this way you save the computation of one raster scanning.
+-  Instead of smoothing the image first, **smoothing the kernel** first is computationally much more efficient.  
+<img src="images/img73.jpg" width="300" style="margin-left: px;">
