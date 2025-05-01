@@ -439,7 +439,7 @@ Do the same thing at the next layer child node
     - RF is an **ensemble learning** based approach. RF aggregates the
 prediction of multiple decision trees.  <br><br>
     
-# Neural Networks
+# Neural Networks (03/13)
 - The idea of a neural networks (NNs):   
 NNs learn relationship between cause(input) and effect(output) or organize large volumes of data into orderly and informative patterns.  
 - Inspiration from Neurobiology:  
@@ -758,4 +758,97 @@ $\frac{\partial f}{\partial y}$: make horizontal image more visible.
 <img src="images/img72.jpg" width="300" style="margin-left: px;">  
 In this way you save the computation of one raster scanning.
 -  Instead of smoothing the image first, **smoothing the kernel** first is computationally much more efficient.  
-<img src="images/img73.jpg" width="300" style="margin-left: px;">
+<img src="images/img73.jpg" width="300" style="margin-left: px;">  
+## 2D Edge detection filters  
+### Derivative of Guassian  
+- Guassian filter is a low pass filter dealing with high frequency noise  
+- Take derivative so it becomes a low pass edge detection filter.  
+<img src="images/img74.jpg" width="300" style="margin-left: px;">  
+<img src="images/img75.jpg" width="300" style="margin-left: px;">  
+
+## Notes  
+- Features in images can be extracted by using various filters (i.e., kernels) through convolution or cross-correlation operations.  
+- How to design good image filters?  
+Designing a **good image filter** depends on the goal—e.g., edge detection, noise reduction, sharpening, blurring, or feature enhancement. Here's a structured approach to designing an effective image filter:
+
+---
+
+### 🧠 **1. Define the Purpose**
+Start by asking: *What do I want this filter to do?*
+
+| Task               | Common Filter Type       |
+|--------------------|--------------------------|
+| Smoothing / Denoising | Gaussian blur, Median filter |
+| Edge Detection     | Sobel, Prewitt, Laplacian |
+| Sharpening         | High-pass, Unsharp mask  |
+| Emboss/Enhance     | Custom convolution kernels |
+| Feature extraction | Gabor, Difference of Gaussians |
+
+---
+
+### ⚙️ **2. Choose the Right Domain**
+- **Spatial domain** filters directly operate on image pixels.
+- **Frequency domain** filters (via Fourier Transform) target specific frequency components, good for periodic noise.
+
+---
+
+### 🧮 **3. Filter Design Parameters**
+#### For spatial domain:
+- **Kernel size** (e.g., \(3\times3\), \(5\times5\)): Larger means more smoothing, but also more blurring.
+- **Weights**: Must match the goal. Example:
+  - **Gaussian kernel** for smooth blur:
+    ```latex
+    \frac{1}{16}
+    \begin{bmatrix}
+    1 & 2 & 1 \\
+    2 & 4 & 2 \\
+    1 & 2 & 1 \\
+    \end{bmatrix}
+    ```
+  - **Sobel operator** for edge detection in x-direction:
+    ```latex
+    \begin{bmatrix}
+    -1 & 0 & 1 \\
+    -2 & 0 & 2 \\
+    -1 & 0 & 1 \\
+    \end{bmatrix}
+    ```
+
+#### For frequency domain:
+- Use **band-pass**, **high-pass**, or **low-pass** filters.
+- Design using masks in the frequency domain after `FFT`.
+
+---
+
+### 🧪 **4. Test and Evaluate**
+Use standard images (e.g., Lena, Cameraman) and check:
+- **Visual quality**
+- **PSNR / SSIM** (if comparing against original)
+- **Edge preservation** vs. noise suppression trade-off
+
+---
+
+### 🛠️ **5. Customize and Optimize**
+- Normalize weights to avoid intensity shift.
+- Use separable filters to reduce computation (e.g., 2D Gaussian = vertical × horizontal 1D Gaussians).
+- Tune parameters based on the dataset.  
+
+<br><br>
+
+# Convolutional Neural Network (CNN) (04/10)  
+## Image recognition  
+- **Classification**   
+Identify the **existence** of an object.
+- **Detection**  
+Identify the **existence** of an object and its **location**.  
+- **Segmentation**   
+(pixel level classification, most difficult)  
+Identify the **existence**, **location**, and **contour** of an object.  
+
+## Model Architecture  
+- **Main idea:**  
+Convolution over input image + fully-connected neural networks (NN)  
+- **Commom Architecture:**  
+Repeated operations of convolution, activation, pooling, followed by
+flattening the feature maps, and then the fully-connected NN.  
+
