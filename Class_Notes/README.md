@@ -850,5 +850,117 @@ Identify the **existence**, **location**, and **contour** of an object.
 Convolution over input image + fully-connected neural networks (NN)  
 - **Commom Architecture:**  
 Repeated operations of convolution, activation, pooling, followed by
-flattening the feature maps, and then the fully-connected NN.  
+flattening the feature maps, and then the fully-connected NN.   
+<img src="images/img76.jpg" width="400" style="margin-left: px;">  
+<img src="images/img77.jpg" width="450" style="margin-left: px;">  
+- **Determine kernal values:**  
+<img src="images/img78.jpg" width="450" style="margin-left: px;">  
+<img src="images/img79.jpg" width="450" style="margin-left: px;">  
+- **Size and parameters:**  
+<img src="images/img80.jpg" width="450" style="margin-left: px;">  
+
+    - input channels determine filter(kernal) depth  
+    - number of filter determine num of feature map(output depth)  
+    - Stride Size and Output Dimension:  
+    <img src="images/img81.jpg" width="450" style="margin-left: px;">
+  - Trainable parameters:  
+    ex: Input volume: 32x32x3 Ten 5x5 filters with stride 1, pad 2  
+    Number of parameters in this layer? each filter has $5*5*3 + 1(bias) = 76$ params   
+    => $76*10(filters) = 760$  
+
+## Hyperparameters  
+- Network architecture  
+    - Number of convolution layers, pooling layers  
+    - Chosen activation functions  
+    - Number of hidden layers, hidden nodes in fully-connected NN  
+- Network training  
+    - Optimizer: SGD, Adam, etc.  
+    - Learning rates and other parameters in the chosen optimizer  
+    - Number of training epochs  
+
+### Note:  
+- What makes CNN so popular nowadays?  
+    - CNN enable you to extract important features automatically without the need of human selected feature extractors (learn from raw data)  
+- Can CNN be used in regression problems?   
+    - Yes  
+
+# Transfer Learning and Auto-encoder (5/17)  
+## Transfer Learning  
+A common technique used when there is only a limited number
+of training samples available  
+### Procedure:  
+- Pick a pre-trained model.
+- Determine the fixed layers, i.e., without gradient updates.  
+- Do fine-tuning on the rest of the layers. (small learning rate) 
+- Check the performance of the model, i.e., if there is any overfitting occurs.  
+
+**Note:**  
+What if your dataset is very different from the dataset used in the pre-trained model?  
+➜ consider to do fine-tuning on the early layers as well.  (or train the model from scratch, but beware of overfitting)  
+<img src="images/img82.jpg" width="450" style="margin-left: px;">  
+<img src="images/img83.jpg" width="200" style="margin-left: px;">  
+**Ex: The early layers are fixed**  
+  <img src="images/img84.jpg" width="450" style="margin-left: px;">  
+
+## Auto-encoder  
+<img src="images/img85.jpg" width="450" style="margin-left: px;">   
+
+- AE belongs to **Unsupervised learning**    
+- After training, the encoder can be used to generate the latent
+representations of inputs. Why this is important?
+➜ Gives you a method to generate the features of input, and you can use these features to train other classifiers. (classification, regression)  
+<img src="images/img86.jpg" width="450" style="margin-left: px;">  
+<img src="images/img87.jpg" width="450" style="margin-left: px;">  
+<br><br>
+
+# Generative Adversarial Network  
+a specialized network architecture consists
+of two components, i.e., a generator and a discriminator, competing against each other during training.  
+<img src="images/img88.jpg" width="450" style="margin-left: px;">  
+
+- Discriminator: determine whether an input (e.g., image) is fake or not.  
+- Generator: generate a fake (e.g., image) that can fool the discriminator.  
+- Useful when: the number of training samples are limited. After training, the generator can produce fake(synthetic) data, given random noise.  
+
+## Training of GAN  
+### Objective  
+After training, the generator is able to generate fake data such that,
+when feeding these fake data into the discriminator, the performance of the discriminator is equivalent to a random guess.  
+
+**Note**:  
+- Is it good to have a generator that can always fool the discriminator?  
+No. because the generator may learn to produce "simple/naive"patterns
+that can always fool the discriminator, **not similar to real data**
+at all.  
+- Best: random guess: Real: 0.5 Fake: 0.5. 
+<img src="images/img89.jpg" width="450" style="margin-left: px;">  
+
+### Failure modes  
+- Training is not easy: Different from training just one network, there are two networks competing (i.e., adversarial) against each other.  
+- **Undesirable situation**: one network dominates over the other one.  
+- Common failure modes:  
+    - **Generator dominates:** the generator may learn a simple/naïve pattern that can always fool the discriminator.  
+    <img src="images/img90.jpg" width="300" style="margin-left: px;">  
+
+    - **Discriminator dominates:**  
+    the generator performs poorly so that the discriminator can always identify it is a fake data.  
+    <img src="images/img91.jpg" width="300" style="margin-left: px;">  
+    - **Balance:**  
+    track the loss of discriminator and generator, and hopefully they **converge to values** of the same order.  
+    <img src="images/img92.jpg" width="300" style="margin-left: px;">  
+
+### Procedure  
+- Step 1:  
+    - Feed the **real data** to the **discriminator**, compute the prediction error (i.e., loss)
+    - update the **discriminator** with a goal of **minimizing the prediction loss**.  
+- Step 2:   
+    - Feed the **fake data (produced by the generator using a random noise)** to the **discriminator**, compute the prediction error (i.e., loss),   
+    - update the **discriminator** with a goal of **minimizing the prediction loss**.  
+- Step 3:   
+    - Feed the **fake data (produced by the generator using a random noise)** to the **discriminator**, compute the prediction error (i.e., loss)  
+    - update the **generator** with a goal of **maximizing the prediction loss**.  
+- Step 4: **repeat** the above steps until the loss values of discriminator and the generator are **balanced**.
+
+
+
 
