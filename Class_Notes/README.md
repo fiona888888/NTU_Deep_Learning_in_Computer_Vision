@@ -959,7 +959,71 @@ at all.
 - Step 3:   
     - Feed the **fake data (produced by the generator using a random noise)** to the **discriminator**, compute the prediction error (i.e., loss)  
     - update the **generator** with a goal of **maximizing the prediction loss**.  
-- Step 4: **repeat** the above steps until the loss values of discriminator and the generator are **balanced**.
+- Step 4: **repeat** the above steps until the loss values of discriminator and the generator are **balanced**.  
+
+### Example code  
+-  **Generator**:  
+
+    <img src="images/img93.jpg" width="400" style="margin-left: px;">    
+
+>Note :  
+>### 🚀 Why use **ReLU in the Generator**?
+>
+>#### 📌 1. **ReLU promotes sparse activations**
+>- ReLU outputs `0` for negative inputs and the input itself for positive values.
+>- This creates **sparse activations**, meaning not all neurons fire.
+>- In the Generator, this **forces the network to focus on only meaningful features**, helping it build clearer, sharper patterns as it "constructs" an image.
+>
+>#### 📌 2. **Non-saturating gradients**
+>- ReLU avoids the vanishing gradient problem (unlike sigmoid or tanh in hidden layers).
+>- This leads to **better gradient flow during training**, helping the Generator learn faster.
+>
+>#### 📌 3. **Works well with ConvTranspose2d**
+>- ReLU fits naturally between `ConvTranspose2d` layers in the Generator to help **introduce non-linearity** after upsampling.
+>- Each layer can increase image size **and** selectively enhance features through ReLU.
+>
+>#### 📌 4. **Cleaner feature development**
+>- Compared to Leaky ReLU or Tanh (used only at the output), ReLU in hidden layers **encourages the formation of strong, clean feature maps** that represent shapes, textures, etc.
+
+<br>
+
+- **Discriminator:**    
+
+    <img src="images/img94.jpg" width="400" style="margin-left: px;">   
+
+    > Note:1. 🚫 Standard ReLU Problem: "Dying ReLU"
+In a normal ReLU, negative inputs output zero.
+If too many neurons receive only negative inputs, their gradients become zero — they stop learning.
+This is especially problematic in the Discriminator, which needs to learn subtle features from both real and fake images.
+
+- Step0:  
+    <img src="images/img95.jpg" width="400" style="margin-left: px;">
+- Step1:  
+    <img src="images/img96.jpg" width="400" style="margin-left: px;">  
+
+- Step2:  
+    <img src="images/img97.jpg" width="400" style="margin-left: px;">  
+
+- Step3:  
+    <img src="images/img98.jpg" width="400" style="margin-left: px;">  
+
+    <img src="images/img99.jpg" width="400" style="margin-left: px;">  
+    <img src="images/img100.jpg" width="400" style="margin-left: px;">    
+
+#### Sources and supplementaries 
+https://pytorch.org/tutorials/beginner/dcgan_faces_tutorial.html 
+ 
+Important generative models
+- Variational Auto encoder (VAE)  
+- Generative Adversarial Network (GAN)
+- Diffussion model
+
+
+
+
+
+
+
 
 
 
