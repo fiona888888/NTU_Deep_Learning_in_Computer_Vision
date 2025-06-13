@@ -1055,6 +1055,64 @@ Processing Methodology Using Bayesian Data Fusion for Autonomous Crack Detection
 
     More training details, see the original R-CNN paper: https://arxiv.org/pdf/1311.2524.pdf  
 
+### Object Detection: Fast R-CNN  
+- To relieve the computation burden in R-CNN, fast R-CNN is proposed.  
+    - Motivation:  
+    In R-CNN, the features in **overlapped region proposals** are **repeatedly computed**. We could save these computations.   
+    <img src="images/img105.jpg" width="400" style="margin-left: px;">  
+
+    - Solution:   
+    The region proposals are  **extracted** **in feature** **maps** generated from CNN, by feeding the **whole image**. This requires the consideration of appropriate **down-sampling factors**(due to pooling layers).  
+    <img src="images/img106.jpg" width="400" style="margin-left: px;">  
+
+    #### Fast R-CNN  
+     Fast R-CNN: The region proposals are **extracted in feature maps** generated from CNN, by feeding the **whole image**. This requires the consideration of
+    appropriate **down-sampling factors**.  
+    - Region of interest (ROI) pooling:   
+    required due to **fixed input size** of the fully-connected NN.  
+    - Compared to R-CNN, linear SVMs are removed.  
+    <img src="images/img107.jpg" width="400" style="margin-left: px;">  
+- More training details, see the original fast R-CNN paper: https://arxiv.org/abs/1504.08083
+- Could we make the detection process **even more efficient**?
+    - Replace the selective search with a CNN, called **region proposal network (RPN)**, to extract region proposals for us.  
+
+    In fast RCNN, you still have to generate ~2000 region proposals from feature maps.  But do we need this?  
+    = replace selective search with a CNN to generate region proposal for us.
+    No need to have ~2000 region proposals.  
+    <img src="images/img108.jpg" width="400" style="margin-left: px;">  
+    > More training details, see the original faster R-CNN paper: https://arxiv.org/abs/1506.01497    
+    >    - During training, four components are jointly trained:  
+    ➢ RPN classification: object / not object  
+    ➢ RPN regression: box coordinates  
+    ➢ Final classification score  
+    ➢ Final box coordinates  
+    <img src="images/img109.jpg" width="150" style="margin-left: px;">  <img src="images/img110.jpeg" width="250" style="margin-left: px;">  
+
+## Object segmentation  
+### U-net
+ - A benchmark network: **U-Net**  
+    - Involves an **encoder** and a **decoder**
+    - Recall a standard CNN:  **make predictions** using **High-level features only**  
+    <img src="images/img111.jpg" width="300" style="margin-left: px;">  
+
+- **U-Net** leverages not only high-level features, but also **low-level features**  
+    ➢ Special skip connections are used.  
+<img src="images/img112.jpg" width="350" style="margin-left: px;">  
+More training details, see the original U-Net paper: https://arxiv.org/pdf/1505.04597.pdf (U-Net + Nested U-Net)   
+
+### Mask R-CNN  
+- Mask R-CNN: adds a **third branch network** that predicts the **object mask**.
+- More training details, see the original Mask R-CNN paper:
+https://arxiv.org/pdf/1703.06870.pdf
+<img src="images/img113.jpg" width="450" style="margin-left: px;">  
+-  Prediction examples in the original Mask R-CNN paper:
+<img src="images/img114.jpg" width="450" style="margin-left: px;">  
+
+### Evaluation Metrics for Detection and Segmentation
+<img src="images/img115.jpg" width="450" style="margin-left: px;">    
+
+- it is important to evaluate foreground IoU, IoU of background is usually high, and doesn't represent good performance, cause its easy to detect.  
+
 
 
 
