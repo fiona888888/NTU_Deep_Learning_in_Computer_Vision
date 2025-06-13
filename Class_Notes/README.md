@@ -884,7 +884,7 @@ flattening the feature maps, and then the fully-connected NN.
 - Can CNN be used in regression problems?   
     - Yes  
 
-# Transfer Learning and Auto-encoder (5/17)  
+# Transfer Learning and Auto-encoder (04/17)  
 ## Transfer Learning  
 A common technique used when there is only a limited number
 of training samples available  
@@ -913,7 +913,7 @@ representations of inputs. Why this is important?
 <img src="images/img87.jpg" width="450" style="margin-left: px;">  
 <br><br>
 
-# Generative Adversarial Network  
+# Generative Adversarial Network  (04/28)
 a specialized network architecture consists
 of two components, i.e., a generator and a discriminator, competing against each other during training.  
 <img src="images/img88.jpg" width="450" style="margin-left: px;">  
@@ -1017,6 +1017,44 @@ Important generative models
 - Variational Auto encoder (VAE)  
 - Generative Adversarial Network (GAN)
 - Diffussion model
+
+<br>
+
+# R-CNN  
+
+### Identification of the location of an object  
+- Method 1: Image Classification + Sliding window
+  - Pick a window size and a step size for the raster scanning.  
+  - Use a classifier to predict the existence of an object, for every image patch  
+  - Group the prediction results.  
+  <br>
+  Example: Chen et al. (2017) “A texture-Based Video
+Processing Methodology Using Bayesian Data Fusion for Autonomous Crack Detection on Metallic
+<img src="images/img101.jpg" width="400" style="margin-left: px;">  
+- **Main disadvantage** for method 1 (Image Classification + Sliding window):  
+    1. It cannot account for these situation where the image contains objects with different scales. **(Solution: R-CNN)**
+    2. Also computation expensive. **(Solution: Fast R-CNN)**  
+    <img src="images/img102.jpg" width="100" style="margin-left: px;">  
+      
+### Object Detection: R-CNN  
+-  To address the issue of **different object scales** in the image, **region-based** **convolutional neural network (R-CNN)** has been proposed.
+    - A **selective search** of **region proposals** is involved.
+    -  Region proposals are fed into a **pre-trained** CNN to produce features.
+    - In addition to identifying the existence of an object, a **bounding box regressor** is used to predict the coordinates of bounding box:  
+    <img src="images/img103.jpg" width="100" style="margin-left: px;">  
+- During training, three components are required:
+    - **Fine-tuning the CNN** : address the **distortion** of **region proposals** induced by required **fixed inputsize** for the pre-trained CNN
+    - **Multiple linear SVM**:  identify the object class. 
+    - **Bounding box regressor:** determine the (x. y. w. h) through least-square estimate.  
+    <img src="images/img104.jpg" width="100" style="margin-left: px;">  
+      
+#### Problem  
+- Main disadvantage: **computational expensive!**  
+    - For one image, there are roughly 2000 region proposals generated.
+    This means the network makes prediction 2000 times for just one input image.    
+
+    More training details, see the original R-CNN paper: https://arxiv.org/pdf/1311.2524.pdf  
+
 
 
 
