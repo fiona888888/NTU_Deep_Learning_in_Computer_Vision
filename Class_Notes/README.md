@@ -1113,12 +1113,127 @@ https://arxiv.org/pdf/1703.06870.pdf
 
 - it is important to evaluate foreground IoU, IoU of background is usually high, and doesn't represent good performance, cause its easy to detect.  
 
+<br>
+
+# Feature Detection in Images (05/12)  
+Essentially, features are interest points in an image:  
+They help you te identify the **characteristic, uniqueness, patterns** of objects.   
+
+### Applications  
+- Object/motion tracking:    
+Which points are good to track?  
+- Object recognition:   
+Find patches likely to tell us something about object category  
+- 3D scene reconstruction:   
+**Find correspondences** across different views
+<img src="images/img116.jpg" width="450" style="margin-left: px;">  
+
+### Examples of Image Matching:  
+<img src="images/img117.jpg" width="450" style="margin-left: px;">  
+<img src="images/img118.jpg" width="450" style="margin-left: px;">   
+<img src="images/img119.jpg" width="450" style="margin-left: px;">
+
+<img src="images/img120.jpg" width="450" style="margin-left: px;">  
+
+<br>  
+
+### Characteristics of Good Features
+<img src="images/img121.jpg" width="450" style="margin-left: px;">
+<img src="images/img122.jpg" width="450" style="margin-left: px;">  
+
+### Typical Keypoint/Feature Matching Procedure  
+1. Find a set of
+distinctive key
+points
+2. Define a region
+around each
+keypoint
+3. Extract and
+normalize the
+region content
+4. Compute a local
+descriptor(ex: grey level
+histogram, gradient magnitude, gradient
+orientation) from the normalized region
+5. Match local descriptors  
+<img src="images/img123.jpg" width="350" style="margin-left: px;">  
+    #### Many Existing Keypoint Detector(the first step)  
+    <img src="images/img124.jpg" width="350" style="margin-left: px;">
+
+<br>
+
+# Scale-Invariant Feature Transform (SIFT)  
+- Effects of scales:  
+<img src="images/img125.jpg" width="350" style="margin-left: px;">  
+- Consider regions (e.g. circles) of different sizes around a point  
+    - Regions of **corresponding** sizes will look the same in both images  
+    <img src="images/img126.jpg" width="350" style="margin-left: px;">    
+
+- Choose the **scale** of the “best” corner!
+<img src="images/img127.jpg" width="350" style="margin-left: px;"> 
+
+### How to tackle with scale ?  
+- Recall a **Gaussian** filter:  
+<img src="images/img128.jpg" width="350" style="margin-left: px;">   
+    1. Gaussian filter with **different 𝝈 values** enables you to look at the object with **different scales/distances**. Simulates zoom in and zoom out.     
+    2. The **larger** the **𝝈 value**, the **larger the scale** at which the gray levels must **change** in order to be **detectable** by the LoG($\nabla^2$ Laplacian of Gaussian) operator.  
+
+### Edge detection  
+#### Derivative of Guassian  
+<img src="images/img129.jpg" width="350" style="margin-left: px;">    
+
+#### Laplacian of Guassian  
+<img src="images/img130.jpg" width="350" style="margin-left: px;">  
+<img src="images/img131.jpg" width="300" style="margin-left: px;">  
+
+> ⚠️ Usually we use Laplacian of Guassian in SIFT  
+>The **gradient operator** ∇G(x, σ) = ∂G(x,σ)/∂x * I(x) is scale-aware:
+You can vary **σ** to detect features at different levels of detail.
+It is used in **Canny edge detector** for **multi-scale edge detection**.
+But: it detects **edges**, not **keypoints or blobs**  
+>### 🔍 SIFT Key Requirements and Why LoG (or DoG) Matters
+> **SIFT needs:**
+>- ✅ **Stable keypoints** — repeatable even under *scale*, *rotation*, and *illumination change*.
+>- ✅ **Precise localization** — found at **local extrema** in *both space and scale*.
+>- ✅ **Blob-like features**, not just edges — helps avoid unstable keypoints along edges.
+>
+>---
+>
+> ## 🧠 Why LoG (or its approximation DoG) is preferred in SIFT:
+>
+>### 🔹 1. **LoG has a distinct response to blobs**
+>
+>* It produces **strong peaks** at the center of blob-like regions (e.g., corners, circular patterns).
+>* SIFT finds **local extrema in scale-space** (x, y, σ), and LoG is mathematically proven to find those.
+>
+>### 🔹 2. **LoG is isotropic**
+>
+>* Responds the same in all directions — great for general keypoint detection.
+>* First derivatives (DoGx, DoGy) are directional — they detect orientation-specific edges.
+>
+>### 🔹 3. **LoG has better stability under scale-space theory**
+>
+>* David Lowe (SIFT creator) showed that >**extrema of LoG are stable across scales**.
+>* And crucially: **DoG ≈ scaled LoG**, but much cheaper to compute!
+>
+>---
+>
+>### 🔁 Summary:
+>
+>| Feature        | First Derivative of Gaussian      | Laplacian of Gaussian (LoG)             |
+>| -------------- | --------------------------------- | --------------------------------------- |
+>| Handles scale? | ✅ Yes (via σ)                     | ✅ Yes (via σ)                           |
+>| Best for?      | Edge detection                    | Blob/keypoint detection                 |
+>| Directional?   | ✅ Yes                             | 🚫 No (isotropic)                       |
+>| Used in SIFT?  | ❌ No (used for orientation later) | ✅ Yes (approximated by DoG)             |
+>| Why?           | Finds edges                       | Finds **stable, scale-invariant blobs** |  
 
 
+#### Example
+<img src="images/img132.jpg" width="300" style="margin-left: px;">  
 
-
-
-
+#### Efficient Implementation of LoG: Difference of Gaussian  
+<img src="images/img133.jpg" width="450" style="margin-left: px;">  
 
 
 
