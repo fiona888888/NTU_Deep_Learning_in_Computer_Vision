@@ -1395,6 +1395,43 @@ the images.
 <img src="images/img167.jpeg" width="300" style="margin-left: px;">
     
 
+# Image Stitching (05/26)  
+<img src="images/img168.jpeg" width="450" style="margin-left: px;">  
+
+### Procedure  
+- Step 1: Establish the **point correspondences** between adjacent images, e.g., **SIFT detector**.  
+
+- Step 2: Find the **homographies** between the adjacent images depending on the **selected reference image**. **RANSAC** is used to eliminate **outlier effects**.  
+
+- Step 3: **Refine** the **homography matrices** using algorithms like Levenberg–Marquardt or DogLeg.  
+
+- Step 4: Transform all the other images onto the reference image using forward warping or inverse warping. **Inverse warping** is more favorable in practice. (See more details in handouts.)  
+
+### Forward Warping (other img -> ref img)  
+
+<img src="images/img169.jpeg" width="450" style="margin-left: px;">  
+<img src="images/img170.jpeg" width="450" style="margin-left: px;">  
+
+### Inverse Warping (ref img -> other img)
+<img src="images/img171.jpeg" width="450" style="margin-left: px;">   
+<img src="images/img172.jpeg" width="450" style="margin-left: px;">  
+
+### Example: Image Stitching  
+<img src="images/img173.jpeg" width="450" style="margin-left: px;">  
+
+<img src="images/img174.jpeg" width="450" style="margin-left: px;">
+<img src="images/img175.jpeg" width="350" style="margin-left: px;">  
+<img src="images/img176.jpeg" width="450" style="margin-left: px;">  
+
+
+# RANdom SAmple Consensus (RANSAC) Algorithm  
+<img src="images/img177.jpeg" width="400" style="margin-left: px;">  
+
+### Effects of Outliers  
+<img src="images/img178.jpeg" width="400" style="margin-left: px;">  
+
+### Concept of RANSAC  
+<img src="images/img179.jpeg" width="400" style="margin-left: px;">  
 
 
 
