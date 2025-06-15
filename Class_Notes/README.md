@@ -1434,6 +1434,34 @@ the images.
 <img src="images/img179.jpeg" width="400" style="margin-left: px;">  
 
 
+### Example: RANSAC for Least Square fit  
+<img src="images/img180.jpeg" width="400" style="margin-left: px;">  
+
+<img src="images/img181.jpeg" width="400" style="margin-left: px;">  
+
+<img src="images/img182.jpeg" width="400" style="margin-left: px;">  
+
+<img src="images/img183.jpeg" width="400" style="margin-left: px;">  
+
+<img src="images/img184.jpeg" width="400" style="margin-left: px;">  
+
+<img src="images/img185.jpeg" width="400" style="margin-left: px;">  
+
+
+### RANSAC in Estimating the Homography  
+<img src="images/img186.jpeg" width="400" style="margin-left: px;">  
+
+### RANSAC: the Decision Threshold $\delta$  
+<img src="images/img187.jpeg" width="400" style="margin-left: px;">  
+
+### The number of repeated trials  
+<img src="images/img188.jpeg" width="400" style="margin-left: px;">  
+
+### The minimum size of acceptable inlier set M  
+<img src="images/img189.jpeg" width="400" style="margin-left: px;">  
+
+### Summary of RANSAC in Estimating Homography  
+<img src="images/img190.jpeg" width="400" style="margin-left: px;">  
 
 
 
