@@ -1304,7 +1304,97 @@ and the **orientations**, forming a **128 elements feature vector**.
 #### Speeded Up Robust Features (SURF)
 - Fast approximation of SIFT idea, efficient computation by 2D box filters & integral images.  
     ➢ 6 times faster than SIFT  
-    ➢ Equivalent quality for object identification
+    ➢ Equivalent quality for object identification  
+
+<br>  
+<br>
+
+# Image Warping, Homogeneous Coordinates and Homography (05/19)  
+
+## Image Warping  
+### Image Transformation (Cont.)  
+- image **filtering**: change **range of pixel values** of an image, i.e., g(x) = T(f(x))  
+
+    <img src="images/img146.jpeg" width="400" style="margin-left: px;">    
+
+- image **warping**: change **the domain** of an image, i.e., g(x) = T(f(x))  
+ 
+### Parametric (Global) Warping    
+- Parametric: The transformation is described using parameters — a small set of numerical values.  
+- Global:The same transformation applies to every pixel in the image — it’s uniform across the whole image.  
+- Warping:  deforming or transforming the spatial layout of an image.  
+- EXAMPLES of parametric warping:  
+
+    <img src="images/img147.jpeg" width="400" style="margin-left: px;">   
+#### Formula operation  
+
+<img src="images/img148.jpeg" width="400" style="margin-left: px;">  
+<img src="images/img149.jpeg" width="400" style="margin-left: px;">  
+
+### Transformation Matrix  
+#### Scaling  
+- Scaling a coordinate: multiply each of its components by a scalar.  
+- Uniform scaling: the scalar is the same for all components.  
+<img src="images/img150.jpeg" width="400" style="margin-left: px;">   
+- Non-uniform scaling: different scalars per component.  
+<img src="images/img151.jpeg" width="400" style="margin-left: px;">  
+<img src="images/img152.jpeg" width="400" style="margin-left: px;">  
+
+#### Rotation  
+<img src="images/img153.jpeg" width="400" style="margin-left: px;">  
+
+#### Basic 2D Transformations  
+<img src="images/img154.jpeg" width="400" style="margin-left: px;">  
+
+## Homogeneous Coordinate  
+In 2D geometry, a point $(x, y)$ in **Cartesian coordinates** becomes $(x, y, 1)$ in **homogeneous coordinates**.
+
+In general:
+
+$$
+(x, y) \quad \rightarrow \quad (kx, ky, k) \quad \text{for any nonzero } k
+$$
+
+This means that **all points of the form $(kx, ky, k)$** represent the **same point** as $(x, y, 1)$ — they’re part of the same “class.”
+The word **homogeneous** means **"same kind or type"** 
+> 💡 **"Homogeneous" means that multiplying all components by the same non-zero value still represents the same thing.**  
+
+<img src="images/img155.jpeg" width="450" style="margin-left: px;">    
+
+- Why the homogeneous representation matters?  
+➢ This representation enables us to **establish the transformation
+relationship** without worrying about the **real scale**!  
+➢ **Powerful**, because typically we **cannot tell the real length** simply using
+the images.  
+➢ This implies, only **the ratio matters** !
+<img src="images/img156.jpeg" width="400" style="margin-left: px;">   
+<img src="images/img157.jpeg" width="450" style="margin-left: px;">  
+
+### Affine Transformations  
+<img src="images/img158.jpeg" width="450" style="margin-left: px;">   
+
+### Projective Transformations  
+<img src="images/img159.jpeg" width="450" style="margin-left: px;">    
+<img src="images/img160.jpeg" width="450" style="margin-left: px;">   
+
+### 2D Image Transformations  
+<img src="images/img161.jpeg" width="350" style="margin-left: px;">   
+
+## Homography  
+<img src="images/img162.jpeg" width="450" style="margin-left: px;">  
+
+### Solving Homography: Least-Square Estimates  
+<img src="images/img163.jpeg" width="450" style="margin-left: px;">  
+<img src="images/img164.jpeg" width="450" style="margin-left: px;">  
+
+
+<img src="images/img165.jpeg" width="450" style="margin-left: px;">    
+
+#### Class example: 
+<img src="images/img166.jpeg" width="450" style="margin-left: px;">
+<img src="images/img167.jpeg" width="300" style="margin-left: px;">
+    
+
 
 
 
