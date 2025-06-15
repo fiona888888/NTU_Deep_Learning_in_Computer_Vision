@@ -1115,7 +1115,7 @@ https://arxiv.org/pdf/1703.06870.pdf
 
 <br>
 
-# Feature Detection in Images (05/12)  
+# Feature Detection in Images (05/08)  
 Essentially, features are interest points in an image:  
 They help you te identify the **characteristic, uniqueness, patterns** of objects.   
 
@@ -1162,7 +1162,7 @@ orientation) from the normalized region
 
 <br>
 
-# Scale-Invariant Feature Transform (SIFT)  
+# Scale-Invariant Feature Transform (SIFT)(05/12) 
 - Effects of scales:  
 <img src="images/img125.jpg" width="350" style="margin-left: px;">  
 - Consider regions (e.g. circles) of different sizes around a point  
@@ -1234,6 +1234,77 @@ But: it detects **edges**, not **keypoints or blobs**
 
 #### Efficient Implementation of LoG: Difference of Gaussian  
 <img src="images/img133.jpg" width="450" style="margin-left: px;">  
+
+## SIFT Feature Detection  
+- Why SIFT is popular:  
+    - **Locality:** features are local, so robust to occlusion and clutter  
+    - **Distinctiveness:** individual features can be matched to a large database
+    of objects  
+    - **Quantity:** many features can be generated for even small objects  
+    - **Efficiency:** close to real-time performance
+- Most importantly, the detected feature are **invariant to translation, rotation, scale, and other imaging parameters.**  
+Example:  
+ <img src="images/img134.jpg" width="350" style="margin-left: px;">   
+
+
+### Detection Steps  
+ <img src="images/img135.jpg" width="450" style="margin-left: px;">   
+ 
+#### Step 1 : Scale-space Extrema Detection  
+- Use the idea of Gaussian pyramid, forming by several **octaves**.  
+- From one octave to another, **down-sample** the image by a factor of 2.  
+- Within each octave, smooth the image using different values of 𝝈, separately by factor $k = 2^{1/s}$, where 𝑠 is the number of intervals considered in each octave.  
+- Compute the **Difference-of-Gaussian (DoG)**.  
+<img src="images/img136.jpg" width="350" style="margin-left: px;">  
+<img src="images/img137.jpeg" width="450" style="margin-left: px;">    
+
+#### Step 2 : Keypoint Localization  
+- Once finish the calculation of DoG, find the **local minima point**  
+- A point is a candidate for **keypoint** if it is a **local minima** within its **26**
+volumetric neighboring points(周圍).  
+<img src="images/img138.jpeg" width="450" style="margin-left: px;">   
+- Rejecting outliers: recall that LoG has strong response along **edge**.  
+- Eliminate responses at edges through **Harris** response function.  
+<img src="images/img139.jpeg" width="450" style="margin-left: px;">  
+
+#### Step 3 : Orientation Assignment  
+<img src="images/img140.jpg" width="450" style="margin-left: px;">  
+
+- Recall: **Image Gradient**  
+<img src="images/img141.jpg" width="450" style="margin-left: px;">  
+- For each Gussian smoothed image at a particular scale, the gradient
+magnitude and the orientation is computed using:  
+
+    <img src="images/img142.jpg" width="450" style="margin-left: px;">  
+
+#### Step 4 : Keypoint descriptor  
+- For each keypoint, the **SIFT descriptor** is obtained by the **gradient magnitudes**
+and the **orientations**, forming a **128 elements feature vector**.  
+<img src="images/img143.jpg" width="450" style="margin-left: px;">  
+
+#### Step 5 : Keypoint matching  
+<img src="images/img144.jpg" width="450" style="margin-left: px;">   
+
+> ✅ Matching Rule (Lowe’s Ratio Test):
+> Only match if:
+>
+>$$
+>\frac{\text{best match distance}}{\text{second-best distance}} < \tau
+>$$
+>
+>* τ is a **threshold**, typically 0.7 or 0.8
+>* This means:
+>
+>  * If the best match is **much better** than the second-best → keep it
+> * If not → **discard** the match (it might be ambiguous or wrong)  
+
+#### Example: SIFT Matching  
+<img src="images/img145.jpg" width="400" style="margin-left: px;">
+
+#### Speeded Up Robust Features (SURF)
+- Fast approximation of SIFT idea, efficient computation by 2D box filters & integral images.  
+    ➢ 6 times faster than SIFT  
+    ➢ Equivalent quality for object identification
 
 
 
